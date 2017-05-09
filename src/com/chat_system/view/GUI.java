@@ -245,9 +245,6 @@ public class GUI extends JFrame implements ActionListener, KeyListener,
 			messRecTA.setText("");
 	}
 
-	private void loadDiscussion() {
-	}
-
 	// __ Methode qui etablit la connexion au ChatSystem :
 	// ____ renvoie 0 si tout s'est bien passe,
 	// ____ 1 sinon (en cas d'exceptions JAVA) -> impossibilite de se connecter
@@ -388,6 +385,11 @@ public class GUI extends JFrame implements ActionListener, KeyListener,
 		this.show();
 		// -- On attend que la connexion soit etablie
 		while (RET_CONNECT != 0) {
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 		// -> affichage etat LOCAL USER
 		System.out.println("--> LOCAL USER : "

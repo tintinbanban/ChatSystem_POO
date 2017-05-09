@@ -85,7 +85,7 @@ public class TCPCommunication implements Runnable {
 
 	public void receiveMessage(Message message) {
 		try {
-			InetAddress ipExp = socket.getInetAddress();
+			InetAddress ipExp = message.getSender().getIP();
 			getController().processMessage(message, ipExp);
 		} catch (IOException e) {
 			e.printStackTrace();
