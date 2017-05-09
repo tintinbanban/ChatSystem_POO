@@ -7,6 +7,8 @@ import java.io.ObjectInputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
+import javax.swing.JOptionPane;
+
 import com.chat_system.controller.Controller;
 import communication.Message;
 
@@ -24,6 +26,8 @@ public class TCPCommunication implements Runnable {
 			throws IOException {
 		this.controller = controller;
 		this.socket = socket;
+		this.in = null;
+		this.out = null;
 	}
 
 	// //////////////////////////////////////////
@@ -62,14 +66,23 @@ public class TCPCommunication implements Runnable {
 
 	// //////////////////////////////////////////
 	// Methode(s) specifique(s)
-	public void initTCPCommunication() {
-		// -- Creation d'un flux d'entree et de sortie
-		try {
-			setOut(new ObjectOutputStream(socket.getOutputStream()));
-			out.flush();
-			setIn(new ObjectInputStream(socket.getInputStream()));
-		} catch (IOException e) {
-			e.printStackTrace();
+	public void initTCPCommunication(boolean outputCommunication) {
+		// -- Creation d'un flux d'entree ou de sortie
+		if (outputCommunication) {
+			// -- TCPCLientSocket qui envoit un message
+			try {
+				setOut(new ObjectOutputStream(socket.getOutputStream()));
+				out.flush();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			// -- TCPCLientSocket qui envoit un message
+			try {
+				setIn(new ObjectInputStream(socket.getInputStream()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -112,15 +125,21 @@ public class TCPCommunication implements Runnable {
 	// Methode(s) redefinie(s)
 	@Override
 	public void run() {
-		initTCPCommunication();
+		initTCPCommunication(false);
 		// -- Si la Socket de communication est ouverte...
 		if (!socket.isClosed()) {
 			try {
 				// -- ... Alors on receptionne l'envoi seulement d'un Objet
 				// : Message
-				Message message = (Message) in.readObject();
-				// Traitement du message
-				receiveMessage(message);
+				Object o = in.readObject();
+				if (o instanceof Message) {
+					// Traitement du message
+					receiveMessage((Message) o);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Type de message inconnu...",
+							"Traitement en réception impossible", JOptionPane.ERROR_MESSAGE);
+				}
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (EOFException e) {

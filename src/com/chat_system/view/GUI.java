@@ -392,8 +392,8 @@ public class GUI extends JFrame implements ActionListener, KeyListener,
 			}
 		}
 		// -> affichage etat LOCAL USER
-		System.out.println("--> LOCAL USER : "
-				+ getController().getLocalUser().getPseudo());
+//		System.out.println("--> LOCAL USER : "
+//				+ getController().getLocalUser().getPseudo());
 		// -> une fois la connection etablie, on ajoute un observateur
 		// pour mettre en place le pattern observer sur la liste d'utilisateurs
 		// connectes

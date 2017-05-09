@@ -127,7 +127,7 @@ public class TCPCLientSocket {
 	public void sendMessage(String info) {
 		if (sClient != null) {
 			if (tcp != null) {
-				tcp.initTCPCommunication();
+				tcp.initTCPCommunication(true);
 				try {
 					// -- Creation du message a vehiculer
 					Message message = new Message(info, getController().getLocalUser());
