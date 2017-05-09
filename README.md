@@ -2,18 +2,18 @@
 Implémentation en 4ème année IR (INSA Toulouse) d'un chat system fonctionnant sur un réseau local. Chat développé en JAVA, intégrant des tests unitaires (JUnit), et respectant les spécifications fonctionnelles décidées en groupe de TPs.
 
 ## Quentin VIOZELANGE ## INSA Toulouse 4IR ## 2016/2017
-# ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-# Ce ChatSystem a été développé et compilé en Java 1.7. Java 1.8 a été inclu dans les librairies afin d'utiliser le JAR 'ChatSystemUtil'.
+# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+# Ce ChatSystem a été développé et compilé en Java 1.7. Cependant, Java 1.8 doit être inclu dans les librairies afin d'utiliser le JAR 'ChatSystemUtil'. 
 
     Pour pouvoir compiler cette application :  
         1. Téléchargez le projet et importez-le dans l'IDE Eclipse. 
-        2. Paramétrez Eclipse pour qu'il utilise Java 1.7 comme environnement d'exécution et de compilation.
+        2. Si l'environnement Java d'Eclipse est le 1.7, alors il faut configurer le buildpath du projet pour ajouter la 
+            librairie Java 1.8, avant d'exécuter le programme. Dans le cas d'un environnement en Java 1.8, il n'y a aucun 
+            paramétrage préalable à faire.
         3. Lancez ensuite en tant qu'Application Java, la classe MainChatSystem.java dans le package 
             src/'com.chat_system.app'
             
-# ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#   Fonctionnalités du ChatSystem
+# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////#   Fonctionnalités du ChatSystem
         
     * Connexion sur un chat local (utilisateur identifié par une adresse IP et un pseudo)
     * Communication sur le chat :
@@ -24,8 +24,7 @@ Implémentation en 4ème année IR (INSA Toulouse) d'un chat system fonctionnant
         gestion des déconnexions automatiques suite à des problèmes réseaux 
             (si un utilisateur n'envoit pas ses méta-données au bout d'un certain temps sur le réseau, il est supprimé de la liste)
                 
-# ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#   Rapport de tests unitaires (JUnit)
+# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////#   Rapport de tests unitaires (JUnit)
 
     Les tests unitaires menés sur ce projet, concernent seulement la partie 'modèle' du ChatSystem, 
     à savoir les classes : User, UserList et Discussion. 
@@ -75,3 +74,19 @@ Implémentation en 4ème année IR (INSA Toulouse) d'un chat system fonctionnant
     
     [validé] completeDiscussion => test du bon formatage d'une chaîne de caractères encapsulée
                 dans un message véhiculé à travers le chat, et reçu par l'utilisateur local
+
+# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////#   Rapport de tests inter-projets
+
+    Des tests de compatibilité ont été exécutés avec un autre binôme du groupe de TP (SARION-RODRIGUEZ VALLEJO). Les test   
+    suivants ont été effectués :
+        * Lancement des deux chats : phase de connexion [OK]
+        * Identification des utilisateurs sur le chat   [OK]
+        * Envoi de messages à travers le chat           [OK]
+        * Réception de messages à travers le chat       [OK]
+        * Phase de déconnexion : suppression et mise à jour de la liste utilisateurs    [OK]
+    
+    En guise d'illustrations, des captures d'écran résultant des tests sont contenues dans le dossier 'tests_inter-projets'. 
+    
+    N.B : seule la partie envoi/réception de fichiers n'est pas possible entre ces deux chats, puisqu'elle n'a été implémentée 
+          de mon côté.
+        
